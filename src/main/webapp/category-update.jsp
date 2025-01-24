@@ -5,44 +5,45 @@
   Time: 12:00 AM
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<!DOCTYPE html>
 <html>
 <head>
     <title>Update Category</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
-<h1>Update Category</h1>
+<header class="navbar">
+    <div class="logo">TEMU</div>
+</header>
 
-<%
-    String message = request.getParameter("message");
-    String error = request.getParameter("error");
+<main class="container">
+    <h1>Update Category</h1>
 
-%>
-<%
-    if (message != null) {
-%>
-<div style="color: green"><%= message %></div>
-<%
-    }
-%>
-<%
-    if (error != null) {
-%>
-<div style="color: red"><%= error %></div>
-<%
-    }
-%>
+    <%
+        String categoryName = (String) request.getAttribute("category_name");
+        String categoryDescription = (String) request.getAttribute("category_description");
+        Integer categoryId = (Integer) request.getAttribute("category_id");
+    %>
 
-<form action="category-update" method="post">
-    <input type="text" name="category_id" />
 
-    <label for="name">Name</label><br>
-    <input type="text" id="name" name="category_name" /><br><br>
+    <form action="category-update" method="post">
+        <input type="hidden" name="category_id" value="<%= categoryId %>">
 
-    <label for="description">Description</label><br>
-    <input type="text" id="description" name="category_description" /><br><br>
+        <div class="form-group">
+            <label for="category_name">Category Name</label>
+            <input type="text" id="category_name" name="category_name" value="<%= categoryName != null ? categoryName : "" %>" class="form-control" required>
+        </div>
 
-    <button type="submit">Update Category</button>
-</form>
+        <div class="form-group">
+            <label for="category_description">Category Description</label>
+            <input type="text" id="category_description" name="category_description" value="<%= categoryDescription != null ? categoryDescription : "" %>" class="form-control" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Update Category</button>
+    </form>
+</main>
 </body>
 </html>
+
