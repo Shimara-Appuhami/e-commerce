@@ -12,34 +12,17 @@
 </head>
 <body>
 <h1>Delete category</h1>
-
 <%
     String message = request.getParameter("message");
     String error = request.getParameter("error");
 %>
-<%
-    if (message != null) {
-%>
-<div style="color: green"><%=message%>
-</div>
-<%
-    }
-%>
-<%
-    if (error != null) {
-%>
-<div style="color: red"><%=error%>
-</div>
-<%
-    }
-%>
+<% if (message != null) { %>
+<div class="alert alert-success"><%= message %></div>
+<% } %>
+<% if (error != null) { %>
+<div class="alert alert-danger"><%= error %></div>
+<% } %>
 
-<form action="category-delete" method="post">
-    <label for="id">ID</label><br/>
-    <input type="number" id="id" name="category_id"/>
-    <br/><br/>
-    <button type="submit">Delete Customer</button>
-</form>
 
 </body>
 </html>
