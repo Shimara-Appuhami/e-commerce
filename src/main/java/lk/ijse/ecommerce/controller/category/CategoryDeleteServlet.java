@@ -1,42 +1,54 @@
 package lk.ijse.ecommerce.controller.category;
 
+import jakarta.annotation.Resource;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
+import javax.sql.DataSource;
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
-@WebServlet(name = "CategoryDeleteServlet", value = "/category-delete")
+@WebServlet(name = "CategoryDeleteServlet", urlPatterns = "/category-delete")
 public class CategoryDeleteServlet extends HttpServlet {
-    String DB_URL = "jdbc:mysql://localhost:3306/ecommerce";
-    String DB_USER = "root";
-    String DB_PASSWORD = "harshima@123";
+
+    @Resource(name = "java:comp/env/jdbc/pool")
+    private DataSource dataSource;
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        int id = Integer.parseInt(req.getParameter("category_id"));
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String categoryId = request.getParameter("categoryId");
 
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
-            String sql = "DELETE FROM categories WHERE id = ?";
-            PreparedStatement pstm = connection.prepareStatement(sql);
-            pstm.setInt(1, id);
+        // Validate categoryId
+        if (categoryId == null || categoryId.trim().isEmpty()) {
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Category ID is required.");
+            return;
+        }
 
-            int rowsAffected = pstm.executeUpdate();
-            if (rowsAffected > 0) {
-                resp.sendRedirect("category-delete.jsp?message=Category deleted successfully");
-            } else {
-                resp.sendRedirect("category-delete.jsp?error=Failed to delete category");
+        try (Connection connection = dataSource.getConnection()) {
+            // SQL query to delete the category
+            String deleteQuery = "DELETE FROM categories WHERE id = ?";
+            try (PreparedStatement ps = connection.prepareStatement(deleteQuery)) {
+                ps.setInt(1, Integer.parseInt(categoryId));
+                int rowsAffected = ps.executeUpdate();
+
+                if (rowsAffected > 0) {
+                    // Redirect to categories page with success message
+                    response.sendRedirect("index?message=Category deleted successfully");
+                } else {
+                    // Handle case where category ID does not exist
+                    response.sendRedirect("category-list.jsp?error=Category not found");
+                }
             }
-        } catch (Exception e) {
+        } catch (NumberFormatException e) {
+            // Handle invalid category ID format
+        } catch (SQLException e) {
+            // Handle database errors
             e.printStackTrace();
-            resp.sendRedirect("category-delete.jsp?error=Failed to delete category");
         }
     }
 }
