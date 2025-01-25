@@ -35,7 +35,7 @@ public class CategoryListServlet extends HttpServlet {
                 CategoryDTO categoryDTO = new CategoryDTO(
                         rst.getInt(1),
                         rst.getString(2),
-                        rst.getString(3)  // Assuming the third column is the image URL
+                        rst.getString(3)
                 );
                 categoryDTOList.add(categoryDTO);
             }

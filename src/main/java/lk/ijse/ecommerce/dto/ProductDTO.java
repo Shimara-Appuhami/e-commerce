@@ -21,7 +21,7 @@ public class ProductDTO {
         this.name = s;
         this.price = v;
         this.qty = i;
-        this.category_id = 0; // Assuming category_id is not provided in the DTO constructor
+        this.category_id = 0;
 
     }
 }

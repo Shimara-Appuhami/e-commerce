@@ -138,17 +138,16 @@
 
 <main class="categories-container">
     <%
-        // Retrieve categories from request attribute
         List<CategoryDTO> categories = (List<CategoryDTO>) request.getAttribute("categories");
         if (categories != null && !categories.isEmpty()) {
             for (CategoryDTO category : categories) {
     %>
-    <!-- Category Card -->
+
     <div class="category-card" id="category-<%= category.getId() %>">
         <img src="<%= category.getId() %>" alt="<%= category.getName() %>">
         <h3><%= category.getName() %></h3>
         <a href="product-list?categoryId=<%= category.getId() %>">View More</a>
-<%--        delete  card--%>
+
         <button type="button" onclick="deleteCategory(<%= category.getId() %>)">Delete</button>
         <script>
             function deleteCategory(categoryId) {
@@ -159,7 +158,6 @@
         </script>
 
 
-        <!-- Delete Form -->
 <%--        <form action="category-delete" method="POST" style="display: inline;">--%>
 <%--            <input type="hidden" name="category_id" value="<%= category.getId() %>">--%>
 <%--            <button type="submit" id="delete-category">Delete</button>--%>

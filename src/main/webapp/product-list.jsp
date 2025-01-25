@@ -59,20 +59,16 @@
 </head>
 <body>
 <div class="container my-5">
-    <!-- Back Button -->
     <a href="index" class="btn btn-primary mb-3">Back to Categories</a>
 
     <h1 class="text-center mb-5">Products by Category</h1>
 
-    <!-- Add Product Button -->
     <a href="product-save" class="btn btn-success mb-3">Add New Product</a>
 
     <%
-        // Retrieve categories and products
         List<CategoryDTO> categories = (List<CategoryDTO>) request.getAttribute("categories");
         Map<Integer, List<ProductDTO>> productsByCategory = (Map<Integer, List<ProductDTO>>) request.getAttribute("productsByCategory");
 
-        // Iterate through categories and display their products
         for (CategoryDTO category : categories) {
     %>
     <div class="category-section">
@@ -80,10 +76,8 @@
 
         <div class="row g-4">
             <%
-                // Get the products for the current category
                 List<ProductDTO> products = productsByCategory.get(category.getId());
                 if (products != null && !products.isEmpty()) {
-                    // Iterate through products and display them as cards
                     for (ProductDTO product : products) {
             %>
             <div class="col-md-3">
@@ -94,7 +88,6 @@
                         <p class="card-text fw-bold">Price: $<%= product.getPrice() %></p>
                         <p class="card-text">Qty: <%= product.getQty() %></p>
 
-                        <!-- Update and Delete Buttons inside the card -->
                         <div class="d-flex justify-content-between">
                             <a href="product-update.jsp?id=<%= product.getId() %>" class="btn btn-warning btn-sm">Update</a>
                             <a href="product-delete.jsp?id=<%= product.getId() %>" class="btn btn-danger btn-sm">Delete</a>
@@ -120,7 +113,6 @@
     %>
 </div>
 
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>

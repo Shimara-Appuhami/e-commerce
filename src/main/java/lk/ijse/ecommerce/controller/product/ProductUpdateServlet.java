@@ -38,7 +38,6 @@ public class ProductUpdateServlet extends HttpServlet {
         List<CategoryDTO> categories = new ArrayList<>();
 
         try (Connection connection = dataSource.getConnection()) {
-            // Fetch product details
             String productSql = "SELECT id, name, price, qty, category_id FROM products WHERE id = ?";
             try (PreparedStatement pstm = connection.prepareStatement(productSql)) {
                 pstm.setInt(1, productId);
@@ -58,7 +57,6 @@ public class ProductUpdateServlet extends HttpServlet {
                 }
             }
 
-            // Fetch category details
             String categorySql = "SELECT id, name FROM categories";
             try (PreparedStatement pstm = connection.prepareStatement(categorySql);
                  ResultSet rs = pstm.executeQuery()) {

@@ -53,7 +53,7 @@
             </td>
             <td>Rs.<%= total %></td>
             <td>
-                <form action="cart" method="post" class="d-inline">
+                <form action="remove-cart.jsp" method="post" class="d-inline">
                     <input type="hidden" name="action" value="remove">
                     <input type="hidden" name="productId" value="<%= product.getId() %>">
                     <button type="submit" class="btn btn-danger btn-sm">Remove</button>

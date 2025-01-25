@@ -323,7 +323,7 @@ the website, in dark theme
     top: 0;
     left: 0;
     z-index: var(--z-fixed);
-    transition: 0.4s; /*For animation dark mode*/
+    transition: 0.4s;
 }
 
      /*=============== GOOGLE FONTS ===============*/

@@ -20,7 +20,6 @@
 <div class="container mt-5">
     <h1 class="text-center mb-4">User Management</h1>
 
-    <!-- Form to Add New User -->
     <form action="UserServlet" method="POST" class="mb-4">
         <div class="mb-3">
             <label for="username" class="form-label">Username</label>
@@ -45,7 +44,7 @@
         <button type="submit" class="btn btn-success">Add User</button>
     </form>
 
-    <!-- Display User List -->
+
     <h2 class="mb-4">User List</h2>
     <table class="table table-bordered">
         <thead>

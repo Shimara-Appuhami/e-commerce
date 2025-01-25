@@ -29,7 +29,6 @@ public class ProductDeleteServlet extends HttpServlet {
         }
 
         try (Connection connection = dataSource.getConnection()) {
-            // SQL query to delete the product
             String deleteQuery = "DELETE FROM products WHERE id = ?";
             try (PreparedStatement ps = connection.prepareStatement(deleteQuery)) {
                 ps.setInt(1, Integer.parseInt(productId));

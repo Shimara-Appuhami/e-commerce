@@ -1160,6 +1160,9 @@
                 <li class="nav__item">
                     <a href="#contact" class="nav__link">Contact Us</a>
                 </li>
+                <li class="nav__item">
+                    <a href="login.jsp" class="nav__link">SignIn</a>
+                </li>
             </ul>
 
             <div class="nav__close" id="nav-close">

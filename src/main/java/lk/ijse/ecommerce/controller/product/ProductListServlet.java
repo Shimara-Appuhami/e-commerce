@@ -46,8 +46,7 @@ public class ProductListServlet extends HttpServlet {
                 );
                 categoryList.add(category);
 
-                // Fetch products for each category using the correct column name 'category_id'
-                String productSql = "SELECT * FROM products WHERE category_id = ?";  // Updated column name
+                String productSql = "SELECT * FROM products WHERE category_id = ?";
                 PreparedStatement productStatement = connection.prepareStatement(productSql);
                 productStatement.setInt(1, category.getId());
                 ResultSet productResultSet = productStatement.executeQuery();
@@ -59,7 +58,7 @@ public class ProductListServlet extends HttpServlet {
                             productResultSet.getString("name"),
                             productResultSet.getDouble("price"),
                             productResultSet.getDouble("qty"),
-                            productResultSet.getInt("category_id")  // Updated column name
+                            productResultSet.getInt("category_id")
                     );
                     productList.add(product);
                 }

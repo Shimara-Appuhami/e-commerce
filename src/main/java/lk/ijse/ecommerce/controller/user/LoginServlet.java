@@ -35,12 +35,12 @@ public class LoginServlet extends HttpServlet {
                 stmt.setString(2, password);
                 try (ResultSet rs = stmt.executeQuery()) {
                     if (rs.next()) {
-                        // User found, create a session and redirect to dashboard
+                        int id = rs.getInt("id");
                         HttpSession session = request.getSession();
                         session.setAttribute("username", username);
-                        response.sendRedirect("index");
+                        session.setAttribute("userId", id);
+                        response.sendRedirect("customer-product");
                     } else {
-                        // User not found, show error message
                         request.setAttribute("errorMessage", "Invalid username or password");
                         RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp");
                         dispatcher.forward(request, response);

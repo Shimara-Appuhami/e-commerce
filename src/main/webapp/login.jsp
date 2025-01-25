@@ -18,14 +18,14 @@
 <div class="container mt-5">
     <h2 class="text-center mb-4">Login</h2>
 
-    <!-- Display Error Message -->
+
     <% if (request.getAttribute("errorMessage") != null) { %>
     <div class="alert alert-danger">
         <%= request.getAttribute("errorMessage") %>
     </div>
     <% } %>
 
-    <!-- Login Form -->
+
     <form action="LoginServlet" method="POST">
         <div class="mb-3">
             <label for="username" class="form-label">Username</label>

@@ -87,18 +87,16 @@
 
 <main class="categories-container">
     <%
-        // Retrieve categories from request attribute
         List<CategoryDTO> categories = (List<CategoryDTO>) request.getAttribute("categories");
         if (categories != null && !categories.isEmpty()) {
             for (CategoryDTO category : categories) {
     %>
-    <!-- Category Card -->
     <div class="category-card">
         <img src="<%= category.getName() %>" alt="<%= category.getName() %>">
         <h3><%= category.getName() %></h3>
         <a href="product-list?categoryId=<%= category.getId() %>">View More</a>
         <a href="category-update?category_id=<%= category.getId() %>" class="btn btn-primary">Update</a>
-        <!-- Delete Form -->
+
         <form action="category-delete" method="post" style="display:inline;">
             <input type="hidden" name="categoryId" value="<%= category.getId() %>">
             <button type="submit" class="delete" onclick="return confirm('Are you sure you want to delete this category?');">Delete</button>

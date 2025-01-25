@@ -40,7 +40,6 @@ public class CategoryUpdateServlet extends HttpServlet {
             req.setAttribute("error", "Failed to load category data");
         }
 
-        // Forward to JSP
         req.getRequestDispatcher("category-update.jsp").forward(req, resp);
     }
 

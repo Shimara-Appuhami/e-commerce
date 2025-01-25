@@ -55,19 +55,17 @@
 </head>
 <body>
 <div class="container my-5">
-  <!-- Back Button -->
   <a href="customer-category" class="btn btn-primary mb-3">Back to Categories</a>
-  <!-- Cart Total -->
+
   <div class="text-end mb-3">
     <a href="show-cart-items"><button class="btn bg-success p-2">
-      See Cart Items: <%= session.getAttribute("cartTotal") != null ? session.getAttribute("cartTotal") : 0 %>
+      See Cart Items: <%= session.getAttribute("cartCount") != null ? session.getAttribute("cartCount") : 0 %>
     </button></a>
   </div>
 
   <h1 class="text-center mb-5">Shop Products</h1>
 
   <%
-    // Retrieve categories and products
     List<CategoryDTO> categories = (List<CategoryDTO>) request.getAttribute("categories");
     Map<Integer, List<ProductDTO>> productsByCategory = (Map<Integer, List<ProductDTO>>) request.getAttribute("productsByCategory");
 
@@ -91,8 +89,7 @@
             <p class="card-text fw-bold">Price: Rs.<%= product.getPrice() %></p>
             <p class="card-text">Available Qty: <%= product.getQty() %></p>
 
-            <!-- Add to Cart Form -->
-            <form action="show-cart" method="post">
+            <form action="customer-product" method="post">
               <input type="hidden" name="productId" value="<%= product.getId() %>">
               <div class="mb-3">
                 <label for="qty<%= product.getId() %>" class="form-label">Select Quantity</label>

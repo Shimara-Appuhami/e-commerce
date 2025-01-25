@@ -39,14 +39,12 @@ public class CustomerCategoryServlet extends HttpServlet {
                 categoryDTOList.add(categoryDTO);
             }
 
-            // Attach the category list to the request and forward it to the JSP
             req.setAttribute("categories", categoryDTOList);
             RequestDispatcher rd = req.getRequestDispatcher("customer-category.jsp");
             rd.forward(req, resp);
 
         } catch (Exception e) {
             e.printStackTrace();
-            // Forward to an error page or show an error message
             req.setAttribute("error", "Failed to load categories. Please try again later.");
             req.getRequestDispatcher("error.jsp").forward(req, resp);
         }
