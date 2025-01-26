@@ -1,8 +1,11 @@
 ﻿# e-commerce
  YouTube URL-https://www.youtube.com/watch?v=GVsDOOlCHYM
 
+
  Overview of the Software:
 This software is an online plant store that simplifies the process of shopping for plants, offering users a seamless and enjoyable experience. It caters to both gardening enthusiasts and beginners, providing tools to browse, select, and purchase plants effortlessly.
+
+Customer-Side Functions of the Online Plant Store
 
 Key Features:
 1. Navigation Bar
@@ -49,6 +52,31 @@ Log in if prompted to save the cart.
 Review items on the Customer Cart Items page.
 Proceed to checkout, review the bill, and place the order.
 View the Order Confirmation page or continue shopping.
+
+User-Side Functions of the Online Plant Store
+1. View Orders
+Users can view their active and completed orders.
+Includes order details like product name, quantity, price, and order status.
+2. Manage Customers
+Active Customers: View a list of customers who have recently interacted with the platform (e.g., placed orders or logged in).
+Deactivated Customers: Manage users who are no longer active on the platform.
+3. Add Categories
+Allows users to create new plant categories (e.g., Indoor Plants, Succulents, etc.) for better organization and browsing.
+4. Update Categories
+Edit category details like name, description, or associated plants.
+5. Delete Categories
+Remove unwanted or outdated categories from the platform.
+6. Manage Products
+Add Products: Include new plants with details such as name, price, stock, category, and care instructions.
+Update Products: Modify product details, including price, quantity, or descriptions.
+Delete Products: Remove plants that are no longer available or discontinued.
+7. Manage Orders
+Active Orders: Monitor and update orders that are being processed.
+Completed Orders: Review the history of fulfilled orders.
+Order Totals: Display the total value of an order, including taxes, discounts, and delivery charges.
+8. Totals Management
+Calculate and display total revenue from completed orders.
+View summaries of daily, weekly, or monthly sales for performance tracking.
 
 ![image alt](https://github.com/Shimara-Appuhami/e-commerce/blob/4662eda6a19818ce8c51386951ee48f85d1fb5e5/Screenshot%202025-01-27%20015547.png)
 ![image alt](https://github.com/Shimara-Appuhami/e-commerce/blob/4662eda6a19818ce8c51386951ee48f85d1fb5e5/Screenshot%202025-01-27%20015613.png)
