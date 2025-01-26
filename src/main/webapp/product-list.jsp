@@ -1,5 +1,4 @@
 <%@ page import="java.util.List" %>
-
 <%@ page import="java.util.Map" %>
 <%@ page import="lk.ijse.ecommerce.dto.CategoryDTO" %>
 <%@ page import="lk.ijse.ecommerce.dto.ProductDTO" %>
@@ -55,15 +54,124 @@
         hr {
             border-top: 2px solid #ddd;
         }
+        .card-img-top{
+            width: 200px;
+            height: 250px;
+            margin-left: 50px;
+
+        }
+        .products-title {
+            font-size: 36px;
+            font-weight: 700;
+            color: #4CAF50;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        .products-title:hover {
+            color: #388e3c;
+            transform: scale(1.05);
+        }
+        .btn-add-product {
+            margin-left: 1200px;
+            display: inline-block;
+            padding: 12px 25px;
+            font-size: 16px;
+            font-weight: 600;
+            color: #fff;
+            background-color: #4CAF50;
+            border: none;
+            border-radius: 50px;
+            text-align: center;
+            text-decoration: none;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .btn-add-product:hover {
+            background-color: #388e3c;
+            transform: scale(1.05);
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-add-product:active {
+            background-color: #2c6e2f;
+            transform: scale(1);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .category-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: #727c72;
+            text-align: center;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .category-title::after {
+            content: "";
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: #4CAF50;
+            border-radius: 2px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 14px;
+            font-weight: 600;
+            text-align: center;
+            border-radius: 25px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .btn-update {
+            background-color: #ffcc00;
+            color: white;
+            border: 2px solid #ffcc00;
+        }
+
+        .btn-update:hover {
+            background-color: #ffb700;
+            border-color: #ffb700;
+        }
+
+        .btn-delete {
+            background-color: #dc3545;
+            color: white;
+            border: 2px solid #dc3545;
+        }
+
+        .btn-delete:hover {
+            background-color: #c82333;
+            border-color: #c82333;
+        }
+
+        .btn:focus {
+            outline: none;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        }
+
+
     </style>
 </head>
 <body>
 <div class="container my-5">
-    <a href="index" class="btn btn-primary mb-3">Back to Categories</a>
+    <a href="index" class="btn "><img src="img/icons8-back-to-50.png"></a>
 
-    <h1 class="text-center mb-5">Products by Category</h1>
+    <h1 class="text-center mb-5 products-title">Products</h1>
 
-    <a href="product-save" class="btn btn-success mb-3">Add New Product</a>
+    <a href="product-save" class="btn-add-product">Add New Product</a>
 
     <%
         List<CategoryDTO> categories = (List<CategoryDTO>) request.getAttribute("categories");
@@ -72,7 +180,7 @@
         for (CategoryDTO category : categories) {
     %>
     <div class="category-section">
-        <h2><%= category.getName() %></h2>
+        <h2 class="category-title"><%= category.getName() %></h2>
 
         <div class="row g-4">
             <%
@@ -82,15 +190,17 @@
             %>
             <div class="col-md-3">
                 <div class="card shadow-sm">
-                    <img src="https://via.placeholder.com/150" class="card-img-top" alt="<%= product.getName() %>">
+                    <!-- Display the product image -->
+                    <img src="<%= product.getImage_path() %>" class="card-img-top" alt="<%= product.getName() %>">
                     <div class="card-body">
                         <h5 class="card-title text-truncate"><%= product.getName() %></h5>
                         <p class="card-text fw-bold">Price: $<%= product.getPrice() %></p>
                         <p class="card-text">Qty: <%= product.getQty() %></p>
 
                         <div class="d-flex justify-content-between">
-                            <a href="product-update.jsp?id=<%= product.getId() %>" class="btn btn-warning btn-sm">Update</a>
-                            <a href="product-delete.jsp?id=<%= product.getId() %>" class="btn btn-danger btn-sm">Delete</a>
+                            <a href="product-update.jsp?id=<%= product.getId() %>" class="btn btn-update">Update</a>
+                            <a href="product-delete.jsp?id=<%= product.getId() %>" class="btn btn-delete">Delete</a>
+
                         </div>
                     </div>
                 </div>

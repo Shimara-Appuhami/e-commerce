@@ -83,7 +83,6 @@
 </head>
 <body>
 <div class="container">
-    <h2>Your Cart</h2>
 
     <%
         List<CartDTO> cartItems = (List<CartDTO>) request.getAttribute("cartItems");
@@ -133,16 +132,17 @@
         %>
     </div>
 
-    <div class="checkout-btn">
-        <a href="checkout.jsp" class="btn btn-success">Proceed to Checkout</a>
-    </div>
 
     <%
         }
     %>
 
 </div>
-
+<form action="checkout" method="POST" >
+    <div class="checkout-btn" >
+        <a href="checkout" class="btn btn-success"> Checkout</a>
+    </div>
+</form>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

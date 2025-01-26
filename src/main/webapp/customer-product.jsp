@@ -51,19 +51,98 @@
     hr {
       border-top: 2px solid #ddd;
     }
+    .shop-products-title {
+      text-align: center;
+      font-size: 36px;
+      font-family: 'Arial', sans-serif;
+      font-weight: 700;
+      color: #239326;
+      margin-bottom: 30px;
+      position: relative;
+    }
+
+    .shop-products-title::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 4px;
+      background-color: #4CAF50;
+    }
+    .search-bar {
+      display: flex;
+      justify-content: center; /* Center the form */
+      margin: 20px 0; /* Add some spacing around the search bar */
+      padding: 10px;
+      background-color: #f9f9f9; /* Light gray background */
+      border-radius: 10px; /* Rounded corners */
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    }
+
+    .search-bar form {
+      display: flex;
+      align-items: center; /* Align inputs and button vertically */
+      gap: 10px; /* Space between elements */
+      width: 100%;
+      max-width: 800px; /* Limit form width */
+    }
+
+    .search-bar input {
+      padding: 10px;
+      border: 1px solid #ccc; /* Light gray border */
+      border-radius: 5px; /* Rounded corners */
+      font-size: 16px;
+      flex: 1; /* Make inputs flexible */
+      transition: border-color 0.3s; /* Smooth border change on focus */
+    }
+
+    .search-bar input:focus {
+      border-color: #4CAF50; /* Green border on focus */
+      outline: none; /* Remove default outline */
+    }
+
+    .search-bar button {
+      background-color: #4CAF50; /* Green background */
+      color: white; /* White text */
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s; /* Smooth hover effect */
+    }
+
+    .search-bar button:hover {
+      background-color: #45a049; /* Darker green on hover */
+    }
+
+
   </style>
 </head>
 <body>
 <div class="container my-5">
-  <a href="customer-category" class="btn btn-primary mb-3">Back to Categories</a>
+  <a href="customer-category" class="btn  mb-3"><img src="img/icons8-back-to-50.png"></a>
 
   <div class="text-end mb-3">
     <a href="show-cart-items"><button class="btn bg-success p-2">
-      See Cart Items: <%= session.getAttribute("cartCount") != null ? session.getAttribute("cartCount") : 0 %>
+      <img src="img/icons8-cart-48.png"><%= session.getAttribute("cartCount") != null ? session.getAttribute("cartCount") : 0 %>
     </button></a>
   </div>
+<%--  search--%>
 
-  <h1 class="text-center mb-5">Shop Products</h1>
+
+
+  <div class="search-bar">
+    <form action="search-product" method="get">
+      <input type="text" name="query" placeholder="Search products by name" required>
+      <input type="number" name="minPrice" placeholder="Min price" step="0.01">
+      <input type="number" name="maxPrice" placeholder="Max price" step="0.01">
+      <button type="submit">Search</button>
+    </form>
+  </div>
+  <h1 class="shop-products-title">Shop Products</h1>
 
   <%
     List<CategoryDTO> categories = (List<CategoryDTO>) request.getAttribute("categories");
@@ -83,7 +162,7 @@
       %>
       <div class="col-md-3">
         <div class="card shadow-sm">
-          <img src="https://via.placeholder.com/150" class="card-img-top" alt="<%= product.getName() %>">
+          <img src="<%= product.getImage_path() %>" class="card-img-top" alt="<%= product.getName() %>">
           <div class="card-body">
             <h5 class="card-title text-truncate"><%= product.getName() %></h5>
             <p class="card-text fw-bold">Price: Rs.<%= product.getPrice() %></p>

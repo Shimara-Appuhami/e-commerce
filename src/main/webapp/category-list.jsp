@@ -77,22 +77,63 @@
         .category-card form button.delete:hover {
             background-color: #c82333;
         }
+        .navbar{
+            width: 100%;
+            height: 50px;
+        }
+        .navbar {
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            gap: 5px;
+            background-color: #5d9160;
+            padding: 10px 0;
+        }
+
+        .add {
+            margin-left: 100px;
+            background-color: transparent;
+            color: white;
+            font-size: 16px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .add:hover {
+            border-radius: 50px;
+            background-color: #a2aca3;
+        }
+
     </style>
 </head>
 <body>
+
 <header class="navbar">
-    <div class="logo">TEMU</div>
-    <a href="category-save.jsp"><button>Add Category</button></a>
+    <a href="category-save.jsp"><button class="add">Add Category</button></a>
+    <a href="user.jsp"><button class="add">Register</button></a>
+    <a href="product-list"><button class="add">My Products</button></a>
+    <a href="show-orders"><button class="add">My Orders</button></a>
+    <a href="show-cart-items.jsp"><button class="add">Add Category</button></a>
+    <a href="user-update.jsp"><button class="add">Manage Customers</button></a>
+
+
+
 </header>
+<a href="login.jsp"><img src="img/icons8-back-to-50.png"></a>
 
 <main class="categories-container">
+
     <%
         List<CategoryDTO> categories = (List<CategoryDTO>) request.getAttribute("categories");
         if (categories != null && !categories.isEmpty()) {
             for (CategoryDTO category : categories) {
     %>
+    <img src="img/img.png">
     <div class="category-card">
-        <img src="<%= category.getName() %>" alt="<%= category.getName() %>">
+<%--        <img src="<%= category.getName() %>" alt="<%= category.getName() %>">--%>
         <h3><%= category.getName() %></h3>
         <a href="product-list?categoryId=<%= category.getId() %>">View More</a>
         <a href="category-update?category_id=<%= category.getId() %>" class="btn btn-primary">Update</a>

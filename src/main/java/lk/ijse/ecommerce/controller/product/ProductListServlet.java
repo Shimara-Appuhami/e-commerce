@@ -20,9 +20,8 @@ import java.util.Map;
 
 @WebServlet(name = "ProductServlet", value = "/product-list")
 public class ProductListServlet extends HttpServlet {
-    String DB_URL = "jdbc:mysql://localhost:3306/ecommerce";
-    String DB_USER = "root";
-    String DB_PASSWORD = "harshima@123";
+    @Resource(name = "java:comp/env/jdbc/pool")
+    private DataSource dataSource;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -31,7 +30,7 @@ public class ProductListServlet extends HttpServlet {
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+            Connection connection = dataSource.getConnection();
 
             // Fetch categories
             String categorySql = "SELECT * FROM categories";
@@ -58,7 +57,8 @@ public class ProductListServlet extends HttpServlet {
                             productResultSet.getString("name"),
                             productResultSet.getDouble("price"),
                             productResultSet.getDouble("qty"),
-                            productResultSet.getInt("category_id")
+                            productResultSet.getInt("category_id"),
+                            productResultSet.getString("image_path")
                     );
                     productList.add(product);
                 }

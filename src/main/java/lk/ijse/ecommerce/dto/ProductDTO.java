@@ -15,6 +15,7 @@ public class ProductDTO {
     private double price;
     private double qty;
     private int category_id;
+    private String image_path;
 
     public ProductDTO(int productId, String s, double v, int i) {
         this.id = productId;

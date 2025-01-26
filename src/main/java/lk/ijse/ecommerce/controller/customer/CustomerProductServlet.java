@@ -57,7 +57,8 @@ public class CustomerProductServlet extends HttpServlet {
                                         productResultSet.getString("name"),
                                         productResultSet.getDouble("price"),
                                         productResultSet.getDouble("qty"),
-                                        productResultSet.getInt("category_id")
+                                        productResultSet.getInt("category_id"),
+                                        productResultSet.getString("image_path")
                                 );
                                 productList.add(product);
                             }

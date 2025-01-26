@@ -1161,7 +1161,7 @@
                     <a href="#contact" class="nav__link">Contact Us</a>
                 </li>
                 <li class="nav__item">
-                    <a href="login.jsp" class="nav__link">SignIn</a>
+                    <a href="login.jsp" class="nav__link">Sign In</a>
                 </li>
             </ul>
 
@@ -1291,37 +1291,40 @@
             </div>
         </div>
     </section>
-    <header class="navbar">
-        <div class="logo">TEMU</div>
-        <a href="category-save.jsp"><button>Add Category</button></a>
-    </header>
+<%--    <header class="navbar">--%>
+<%--        <a href="category-save.jsp"><button>Add Category</button></a>--%>
+<%--    </header>--%>
 
-    <main class="categories-container">
-        <%
-            // Retrieve categories from request attribute
-            List<CategoryDTO> categories = (List<CategoryDTO>) request.getAttribute("categories");
-            if (categories != null && !categories.isEmpty()) {
-                for (CategoryDTO category : categories) {
-        %>
-        <!-- Category Card -->
-        <div class="category-card">
-            <img src="<%= category.getName() %>" alt="<%= category.getName() %>">
-            <h3><%= category.getName() %></h3>
-            <a href="product-list?categoryId=<%= category.getId() %>">View More</a>
-            <a href="category-update?category_id=<%= category.getId() %>" class="btn btn-primary">Update</a>
-            <!-- Delete Form -->
-            <form action="category-delete" method="post" style="display:inline;">
-                <input type="hidden" name="categoryId" value="<%= category.getId() %>">
-                <button type="submit" class="delete" onclick="return confirm('Are you sure you want to delete this category?');">Delete</button>
-            </form>
-        </div>
-        <%
-            }
-        } else {
-        %>
-        <p>No categories available.</p>
-        <% } %>
-    </main>
+
+<%--    <main class="categories-container" >--%>
+<%--        <form action="customer-category" method="post">--%>
+<%--        <%--%>
+<%--            // Retrieve categories from request attribute--%>
+<%--            List<CategoryDTO> categories = (List<CategoryDTO>) request.getAttribute("categories");--%>
+<%--            if (categories != null && !categories.isEmpty()) {--%>
+<%--                for (CategoryDTO category : categories) {--%>
+<%--        %>--%>
+<%--        <!-- Category Card -->--%>
+<%--        <div class="category-card">--%>
+<%--            <img src="<%= category.getName() %>" alt="<%= category.getName() %>">--%>
+<%--            <h3><%= category.getName() %></h3>--%>
+<%--            <a href="product-list?categoryId=<%= category.getId() %>">View More</a>--%>
+<%--            <a href="category-update?category_id=<%= category.getId() %>" class="btn btn-primary">Update</a>--%>
+<%--            <!-- Delete Form -->--%>
+<%--            <form action="category-delete" method="post" style="display:inline;">--%>
+<%--                <input type="hidden" name="categoryId" value="<%= category.getId() %>">--%>
+<%--                <button type="submit" class="delete" onclick="return confirm('Are you sure you want to delete this category?');">Delete</button>--%>
+<%--            </form>--%>
+<%--        </div>--%>
+<%--        <%--%>
+<%--            }--%>
+<%--        } else {--%>
+<%--        %>--%>
+<%--        <p>No categories available.</p>--%>
+<%--        <% } %>--%>
+<%--    </form>--%>
+<%--    </main>--%>
+
     <!--==================== QUESTIONS ====================-->
     <section class="questions section" id="faqs">
         <h2 class="section__title-center questions__title container">

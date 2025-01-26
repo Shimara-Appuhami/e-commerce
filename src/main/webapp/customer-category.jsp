@@ -1153,6 +1153,32 @@
         .category-card a:hover {
             background-color: #457062;
         }
+             .shop-now-btn {
+                 display: inline-block;
+                 padding: 12px 30px;
+                 font-size: 16px;
+                 text-align: center;
+                 text-decoration: none;
+                 background-color: #4CAF50;
+                 color: white;
+                 border-radius: 50%;
+                 border: 2px solid #4CAF50;
+                 transition: all 0.3s ease;
+             }
+
+             .shop-now-btn:hover {
+                 background-color: #45a049; /* Darker green on hover */
+                 color: white;
+                 text-decoration: none;
+                 transform: scale(1.05); /* Slight scale effect */
+             }
+
+             .shop-now-btn:active {
+                 background-color: #3e8e41; /* Even darker green when clicked */
+                 transform: scale(1);
+             }
+
+
     </style>
 </head>
 <body>
@@ -1177,9 +1203,9 @@
 <%--                <li class="nav__item">--%>
 <%--                    <a href="#faqs" class="nav__link">FAQs</a>--%>
 <%--                </li>--%>
-<%--                <li class="nav__item">--%>
-<%--                    <a href="#contact" class="nav__link">Contact Us</a>--%>
-<%--                </li>--%>
+                <li class="nav__item">
+                    <a href="login.jsp" class="nav__link">Sign in</a>
+                </li>
             </ul>
 
             <div class="nav__close" id="nav-close">
@@ -1206,9 +1232,10 @@
             for (CategoryDTO category : categories) {
     %>
     <div class="category-card">
-        <img src="<%= category.getId() %>" alt="<%= category.getName() %>">
+<%--        <img src="<%= category.getId() %>" alt="<%= category.getName() %>">--%>
         <h3><%= category.getName() %></h3>
-        <a href="customer-product?categoryId=<%= category.getId() %>">Shop Now</a>
+        <h6><%= category.getDescription() %></h6>
+        <a href="customer-product?categoryId=<%= category.getId() %>" class="shop-now-btn">Shop Now</a>
     </div>
     <%
         }

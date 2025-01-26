@@ -13,33 +13,231 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* * * * * General CSS * * * * */
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 16px;
+            font-weight: 400;
+            color: #666666;
+            background: #eaeff4;
+        }
+
+        .wrapper {
+            margin: 0 auto;
+            width: 100%;
+            max-width: 1140px;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            height: auto;
+            display: flex;
+            background: #ffffff;
+            box-shadow: 0 0 15px rgba(0, 0, 0, .1);
+            border-radius: 10px;
+        }
+
+        .credit {
+            position: relative;
+            margin: 25px auto 0 auto;
+            width: 100%;
+            text-align: center;
+            color: #666666;
+            font-size: 16px;
+            font-weight: 400;
+        }
+
+        .credit a {
+            color: #222222;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        /* * * * * Login Form CSS * * * * */
+        h2 {
+            margin: 0 0 15px 0;
+            font-size: 30px;
+            font-weight: 700;
+        }
+
+        h2 img {
+            width: 120px;
+        }
+
+        p {
+            margin: 0 0 20px 0;
+            font-size: 16px;
+            font-weight: 500;
+            line-height: 22px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 7px 20px;
+            font-size: 16px;
+            letter-spacing: 1px;
+            text-decoration: none;
+            border-radius: 5px;
+            color: #ffffff;
+            outline: none;
+            border: 1px solid #ffffff;
+            transition: .3s;
+            -webkit-transition: .3s;
+        }
+
+        .btn:hover {
+            color: #4CAF50;
+            background: #ffffff;
+        }
+
+        .col-left,
+        .col-right {
+            width: 55%;
+            padding: 45px 35px;
+            display: flex;
+        }
+
+        .col-left {
+            width: 45%;
+            background: #4CAF50;
+            -webkit-clip-path: polygon(98% 17%, 100% 34%, 98% 51%, 100% 68%, 98% 84%, 100% 100%, 0 100%, 0 0, 100% 0);
+            clip-path: polygon(98% 17%, 100% 34%, 98% 51%, 100% 68%, 98% 84%, 100% 100%, 0 100%, 0 0, 100% 0);
+        }
+
+        @media(max-width: 575.98px) {
+            .container {
+                flex-direction: column;
+                box-shadow: none;
+            }
+
+            .col-left,
+            .col-right {
+                width: 100%;
+                margin: 0;
+                padding: 30px;
+                -webkit-clip-path: none;
+                clip-path: none;
+            }
+        }
+
+        .login-text {
+            position: relative;
+            width: 100%;
+            color: #ffffff;
+            text-align: center;
+        }
+
+        .login-form {
+            position: relative;
+            width: 100%;
+            color: #666666;
+        }
+
+        .login-form p:last-child {
+            margin: 0;
+        }
+
+        .login-form p a {
+            color: #4CAF50;
+            font-size: 14px;
+            text-decoration: none;
+        }
+
+        .login-form p:last-child a:last-child {
+            float: right;
+        }
+
+        .login-form label {
+            display: block;
+            width: 100%;
+            margin-bottom: 2px;
+            letter-spacing: .5px;
+        }
+
+        .login-form p:last-child label {
+            width: 60%;
+            float: left;
+        }
+
+        .login-form label span {
+            color: #ff574e;
+            padding-left: 2px;
+        }
+
+        .login-form input {
+            display: block;
+            width: 100%;
+            height: 40px;
+            padding: 0 10px;
+            font-size: 16px;
+            letter-spacing: 1px;
+            outline: none;
+            border: 1px solid #cccccc;
+            border-radius: 5px;
+        }
+
+        .login-form input:focus {
+            border-color: #ff574e;
+        }
+
+        .login-form input.btn {
+            color: #ffffff;
+            background: #4CAF50;
+            border-color: #4CAF50;
+            outline: none;
+            cursor: pointer;
+        }
+
+        .login-form input.btn:hover {
+            color: #4CAF50;
+            background: #ffffff;
+        }
+    </style>
 </head>
 <body>
-<div class="container mt-5">
-    <h2 class="text-center mb-4">Login</h2>
+<div class="wrapper">
+    <div class="container">
+        <div class="col-left">
+            <div class="login-text">
+                <h2>Welcome Back!</h2>
+                <p>Please log in to your account.</p>
+            </div>
+        </div>
+        <div class="col-right">
+            <div class="login-form">
+                <% if (request.getAttribute("errorMessage") != null) { %>
+                <div class="alert alert-danger">
+                    <%= request.getAttribute("errorMessage") %>
+                </div>
+                <% } %>
+                <form action="LoginServlet" method="POST">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" class="form-control" required>
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" class="form-control" required>
+                    <button type="submit" class="btn">Login</button>
+                </form>
+                <p>Don't have an account? <a href="user.jsp">Sign Up</a></p>
+                <p>If You Forgot Password? <a href="customer-update.jsp">Click</a></p>
 
-
-    <% if (request.getAttribute("errorMessage") != null) { %>
-    <div class="alert alert-danger">
-        <%= request.getAttribute("errorMessage") %>
+            </div>
+        </div>
     </div>
-    <% } %>
-
-
-    <form action="LoginServlet" method="POST">
-        <div class="mb-3">
-            <label for="username" class="form-label">Username</label>
-            <input type="text" id="username" name="username" class="form-control" required>
-        </div>
-        <div class="mb-3">
-            <label for="password" class="form-label">Password</label>
-            <input type="password" id="password" name="password" class="form-control" required>
-        </div>
-        <button type="submit" class="btn btn-primary">Login</button>
-    </form>
 </div>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
-

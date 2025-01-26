@@ -38,7 +38,7 @@ public class ProductUpdateServlet extends HttpServlet {
         List<CategoryDTO> categories = new ArrayList<>();
 
         try (Connection connection = dataSource.getConnection()) {
-            String productSql = "SELECT id, name, price, qty, category_id FROM products WHERE id = ?";
+            String productSql = "SELECT id, name, price, qty, category_id,image_path FROM products WHERE id = ?";
             try (PreparedStatement pstm = connection.prepareStatement(productSql)) {
                 pstm.setInt(1, productId);
                 try (ResultSet rs = pstm.executeQuery()) {
@@ -48,7 +48,8 @@ public class ProductUpdateServlet extends HttpServlet {
                                 rs.getString("name"),
                                 rs.getDouble("price"),
                                 rs.getInt("qty"),
-                                rs.getInt("category_id")
+                                rs.getInt("category_id"),
+                                rs.getString("image_path")
                         );
                     } else {
                         resp.sendRedirect("product-update.jsp?error=Product not found");
@@ -82,12 +83,14 @@ public class ProductUpdateServlet extends HttpServlet {
         int productId, qty, categoryId;
         double price;
         String name = req.getParameter("product_name");
+        String imagePath = req.getParameter("image_path");
 
         try {
             productId = Integer.parseInt(req.getParameter("product_id"));
             price = Double.parseDouble(req.getParameter("product_price"));
             qty = Integer.parseInt(req.getParameter("product_qty"));
             categoryId = Integer.parseInt(req.getParameter("category_id"));
+//              imagePath = req.getParameter("image_path");
 
             if (name == null || name.trim().isEmpty()) {
                 throw new IllegalArgumentException("Product name is required");
@@ -98,13 +101,14 @@ public class ProductUpdateServlet extends HttpServlet {
         }
 
         try (Connection connection = dataSource.getConnection()) {
-            String sql = "UPDATE products SET name = ?, price = ?, qty = ?, category_id = ? WHERE id = ?";
+            String sql = "UPDATE products SET name = ?, price = ?, qty = ?, category_id = ? ,image_path=? WHERE id = ?";
             try (PreparedStatement pstm = connection.prepareStatement(sql)) {
                 pstm.setString(1, name);
                 pstm.setDouble(2, price);
                 pstm.setInt(3, qty);
                 pstm.setInt(4, categoryId);
                 pstm.setInt(5, productId);
+                pstm.setString(6, imagePath);
 
                 int rowsAffected = pstm.executeUpdate();
                 if (rowsAffected > 0) {

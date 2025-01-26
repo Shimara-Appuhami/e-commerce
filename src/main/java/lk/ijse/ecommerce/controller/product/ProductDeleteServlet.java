@@ -20,7 +20,7 @@ public class ProductDeleteServlet extends HttpServlet {
     private DataSource dataSource;
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String productId = request.getParameter("productId");
 
         if (productId == null || productId.isEmpty()) {
